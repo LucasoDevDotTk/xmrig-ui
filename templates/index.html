@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xmrig UI</title>
+
+    <link
+    href="{{url_for('static', filename = 'main.css')}}"
+    rel="stylesheet"
+  />
+</head>
+<body class="m-4 mt-10 lg:container lg:mx-auto bg-[#030711] text-white">
+
+    <!-- Sidebar -->
+    <div class="block">
+    <div class="w-72 bg-black/40 fixed z-0 top-0 left-0 overflow-x-hidden pt-4 h-full">
+        <nav class="mt-2w">
+        <a class="block" href=""><img class="flex justify-center p-4" src="{{url_for('static', filename = 'logo.svg')}}" alt=""></a>
+        <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block font-bold" href="/">Dashboard</a>
+        <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block" href="/configuration">Configuration</a>
+        <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block" href="/settings">Settings</a>
+        <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block" href="">Documentation</a>
+        </nav>
+    </div>
+</div>
+    <!-- <nav class="mb-10">
+        <a class="bg-[#FFFFFF]/70 p-2 px-5 rounded-md text-[#0F172A] mr-5" href="">Dashboard</a>
+        <a class="border-[#CBD5E1] border p-2 px-5 rounded-md text-white mx-5" href="">Configuration</a>
+        <a class="border-[#CBD5E1] border p-2 px-5 rounded-md text-white mx-5" href="">Settings</a>
+        <a class="border-[#CBD5E1] border p-2 px-5 rounded-md text-white mx-5" href="">Documentation</a>
+    </nav> -->
+    <main class="ml-72 pl-5">
+    <img class="absolute -z-10 w-max -inset-y-52" src="{{url_for('static', filename = 'blurred_blobs.svg')}}" alt="">
+    <h1 class="font-bold text-3xl text-white">Xmrig UI Dashboard</h1>
+    <hr class="mb-4 text-[#CBD5E1]"/>
+
+    <!-- If not configured -->
+    <!-- <p>Xmrig is not configured</p>
+    <button class="border-[#CBD5E1] border p-2 px-5 rounded-md text-white my-4">New Xmrig Configuration</button> -->
+
+    <!-- If configured -->
+    <div class="flex flex-wrap">
+    <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
+        <p class="text-sm">Uptime</p>
+        <p class="font-bold text-4xl">45h</p>
+    </div>
+    <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
+        <p class="text-sm">Hashrate</p>
+        <p class="font-bold text-4xl">2.1K</p>
+    </div>
+    <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
+        <p class="text-sm">Xmrig Version</p>
+        <p class="font-bold text-4xl">v.1.6.8</p>
+    </div>
+    <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
+        <p class="text-sm">CPU Utilization</p>
+        <p class="font-bold text-4xl">97%</p>
+    </div>
+    <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
+        <p class="text-sm">CPU Temperature</p>
+        <p class="font-bold text-4xl">78°</p>
+    </div>
+
+    <!-- Terminal -->
+    <div class="w-full border border-[#CBD5E1] rounded-md h-96 my-2">
+
+        <p class="text-center my-32 font-bold text-3xl text-red-700">TERMINAL | UNDER DEVELOPMENT</p>
+
+    </div>
+
+    <!-- Hashrate graph -->
+    <div class="w-full border border-[#CBD5E1] rounded-md h-96 my-2">
+
+        <p class="text-center my-32 font-bold text-3xl text-red-700">HASRATE GRAPH | UNDER DEVELOPMENT</p>
+
+    </div>
+
+    <!-- CPU TEMP AND USAGE GRAPH -->
+    <div class="w-full border border-[#CBD5E1] rounded-md h-96 my-2">
+
+        <p class="text-center my-32 font-bold text-3xl text-red-700">CPU TEMP AND USAGE GRAPH | UNDER DEVELOPMENT</p>
+
+    </div>
+
+</div>
+</main>
+</body>
+</html>

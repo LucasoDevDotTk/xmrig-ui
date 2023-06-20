@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xmrig UI - Configuration</title>
+
+    <link
+    href="{{url_for('static', filename = 'main.css')}}"
+    rel="stylesheet"
+  />
+</head>
+<body class="m-4 mt-10 lg:container lg:mx-auto bg-[#030711] text-white">
+
+    <!-- Sidebar -->
+    <div class="block">
+    <div class="w-72 bg-black/40 fixed z-0 top-0 left-0 overflow-x-hidden pt-4 h-full">
+        <nav class="mt-2w">
+        <a class="block" href=""><img class="flex justify-center p-4" src="{{url_for('static', filename = 'logo.svg')}}" alt=""></a>
+        <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block" href="/">Dashboard</a>
+        <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block font-bold" href="/configuration">Configuration</a>
+        <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block" href="/settings">Settings</a>
+        <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block" href="">Documentation</a>
+        </nav>
+    </div>
+</div>
+
+</body>
+</html>
