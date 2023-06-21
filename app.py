@@ -18,5 +18,5 @@ def configuration():
     return render_template('settings.html')
 
 if __name__ == "__main__":
-    app.run(debug=True)
-    # FlaskUI(app=app, server="flask").run()
+    # app.run(debug=True)
+    FlaskUI(app=app, server="flask").run()
