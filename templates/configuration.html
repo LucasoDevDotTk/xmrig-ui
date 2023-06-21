@@ -1,29 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>xmrig UI - Configuration</title>
 
-    <link
-    href="{{url_for('static', filename = 'main.css')}}"
-    rel="stylesheet"
-  />
+    <link href="{{url_for('static', filename = 'main.css')}}" rel="stylesheet" />
 </head>
-<body class="m-4 mt-10 lg:container lg:mx-auto bg-[#030711] text-white">
 
+<body class="m-4 mt-10 lg:container lg:mx-auto bg-[#030711] text-white">
     <!-- Sidebar -->
     <div class="block">
-    <div class="w-72 bg-black/40 fixed z-0 top-0 left-0 overflow-x-hidden pt-4 h-full">
-        <nav class="mt-2w">
-        <a class="block" href=""><img class="flex justify-center p-4" src="{{url_for('static', filename = 'logo.svg')}}" alt=""></a>
-        <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block" href="/">Dashboard</a>
-        <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block font-bold" href="/configuration">Configuration</a>
-        <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block" href="/settings">Settings</a>
-        <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block" href="">Documentation</a>
-        </nav>
+        <div class="w-72 bg-black/40 fixed z-0 top-0 left-0 overflow-x-hidden pt-4 h-full">
+            <nav class="mt-2w">
+                <a class="block" href=""><img class="flex justify-center p-4"
+                        src="{{url_for('static', filename = 'logo.svg')}}" alt="" /></a>
+                <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block" href="/">Dashboard</a>
+                <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block font-bold"
+                    href="/configuration">Configuration</a>
+                <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block"
+                    href="/settings">Settings</a>
+                <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block" href="">Documentation</a>
+            </nav>
+        </div>
     </div>
-</div>
 
+    <main class="ml-72 pl-5">
+
+        <h1 class="font-bold text-3xl text-white">Xmrig UI - Configuration</h1>
+        <hr class="mb-4 text-[#CBD5E1]" />
+
+        <!-- Div with a bunch of input fields for configuration of the xmrig software -->
+        <div class="flex flex-col">
+            <div class="">
+                <form action="/configuration" method="POST">
+                    <div class="flex flex-col">
+                        <label class="text-xl font-bold">Currency</label>
+                        <input class="border-[#CBD5E1] bg-white/0 border p-5 rounded-md text-white my-2 block"
+                            type="text" name="coin" placeholder="Coin" />
+                        <input class="border-[#CBD5E1] bg-white/0 border p-5 rounded-md text-white my-2 block"
+                        type="text" name="algorithm" placeholder="Algorithm" />
+                        <label class="text-xl font-bold">Pool</label>
+                        <input class="border-[#CBD5E1] bg-white/0 border p-5 rounded-md text-white my-2 block"
+                            type="text" name="pool" placeholder="Host" />
+                        <input class="border-[#CBD5E1] bg-white/0 border p-5 rounded-md text-white my-2 block"
+                        type="text" name="pool_port" placeholder="Port" />
+                        <label class="text-xl font-bold">Wallet</label>
+                        <input class="border-[#CBD5E1] bg-white/0 border p-5 rounded-md text-white my-2 block"
+                            type="text" name="address" placeholder="Address" />
+                        <input class="border-[#CBD5E1] bg-white/0 border p-5 rounded-md text-white my-2 block"
+                        type="text" name="password" placeholder="Password" />
+
+
+
+                        <!-- Checkboxes for CPU, OpenCL and CUDA mining -->
+                        <label class="text-xl font-bold my-1">Mining Method</label>
+                        <div class="flex my-2">
+                            <input class="block w-8 h-8 mr-4 cursor-pointer"
+                            type="checkbox" name="cpu" />
+                            <label class="font-bold text-xl my-auto">CPU</label>
+                        </div>
+                        <div class="flex my-2">
+                            <input class="block w-8 h-8 mr-4 cursor-pointer"
+                            type="checkbox" name="open_cl" />
+                            <label class="font-bold text-xl my-auto">OpenCL</label>
+                        </div>
+                        <div class="flex my-2">
+                            <input class="block w-8 h-8 mr-4 cursor-pointer"
+                            type="checkbox" name="cuda" />
+                            <label class="font-bold text-xl my-auto">Cuda</label>
+                        </div>
+
+                        <label class="text-xl font-bold my-1">Donation</label>
+                        <input class="border-[#CBD5E1] bg-white/0 border p-5 rounded-md text-white my-2 block"
+                        type="number" name="donation" placeholder="Donation (%)" />
+
+                        <button class="border-green-500 bg-white/0 border p-5 rounded-md text-white my-5 block">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
 </body>
+
 </html>

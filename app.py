@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flaskwebgui import FlaskUI
 
 __version__ = "0.1.0"
@@ -16,6 +16,12 @@ def serve_configuration():
 @app.route('/settings')
 def configuration():
     return render_template('settings.html')
+
+# Post to /configuration and print content posted
+@app.route('/configuration', methods=['POST'])
+def configuration_post():
+    print(request.form)
+    return render_template('configuration.html')
 
 if __name__ == "__main__":
     # app.run(debug=True)
