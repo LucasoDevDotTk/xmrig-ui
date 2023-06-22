@@ -38,54 +38,72 @@
         <h1 class="font-bold text-3xl text-white">Xmrig UI Dashboard</h1>
         <hr class="mb-4 text-[#CBD5E1]" />
 
-        <!-- If not configured -->
-        <!-- <p>Xmrig is not configured</p>
-    <button class="border-[#CBD5E1] border p-2 px-5 rounded-md text-white my-4">New Xmrig Configuration</button> -->
+        {% if configured == "False" %}
+            <p>XMRig is not configured!</p>
+            <a href="/configuration" class="border-green-500 bg-white/0 border text-center p-5 w-full rounded-md text-white my-5 block">Configuration page</a>
+
+        {% endif %}
 
         <!-- If configured -->
-        <div class="flex flex-wrap">
-            <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
-                <p class="text-sm">Uptime</p>
-                <p class="font-bold text-4xl">45h</p>
-            </div>
-            <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
-                <p class="text-sm">Hashrate</p>
-                <p class="font-bold text-4xl">2.1K</p>
-            </div>
-            <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
-                <p class="text-sm">Xmrig Version</p>
-                <p class="font-bold text-4xl">v.1.6.8</p>
-            </div>
-            <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
-                <p class="text-sm">CPU Utilization</p>
-                <p class="font-bold text-4xl">97%</p>
-            </div>
-            <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
-                <p class="text-sm">CPU Temperature</p>
-                <p class="font-bold text-4xl">78°</p>
-            </div>
+        
+        {% if configured == "True" %}
+            {% if running == "False" %}
+                <form action="/start" method="post">
+                    <button class="border-green-500 bg-white/0 border p-5 w-full rounded-md text-white my-5 block">Start XMRig</button>
+                </form>
+            {% endif %}
 
-            <!-- Terminal -->
-            <div class="w-full border border-[#CBD5E1] rounded-md h-96 my-2">
-                <p class="text-center my-32 font-bold text-3xl text-red-700">
-                    TERMINAL | UNDER DEVELOPMENT
-                </p>
-            </div>
+            {% if running == "True" %}      
+                <form action="/stop" method="post">
+                    <button class="border-red-500 bg-white/0 border p-5 w-full rounded-md text-white my-5 block">Stop XMRig</button>
+                </form>
 
-            <!-- Hashrate graph -->
-            <div class="w-full border border-[#CBD5E1] rounded-md h-96 my-2">
-                <p class="text-center my-32 font-bold text-3xl text-red-700">
-                    HASRATE GRAPH | UNDER DEVELOPMENT
-                </p>
-            </div>
+            {% endif %}
 
-            <!-- CPU TEMP AND USAGE GRAPH -->
-            <div class="w-full border border-[#CBD5E1] rounded-md h-96 my-2">
-                <p class="text-center my-32 font-bold text-3xl text-red-700">
-                    CPU TEMP AND USAGE GRAPH | UNDER DEVELOPMENT
-                </p>
+            <div class="flex flex-wrap">
+                <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
+                    <p class="text-sm">Uptime</p>
+                    <p class="font-bold text-4xl">45h</p>
+                </div>
+                <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
+                    <p class="text-sm">Hashrate</p>
+                    <p class="font-bold text-4xl">2.1K</p>
+                </div>
+                <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
+                    <p class="text-sm">Xmrig Version</p>
+                    <p class="font-bold text-4xl">v.1.6.8</p>
+                </div>
+                <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
+                    <p class="text-sm">CPU Utilization</p>
+                    <p class="font-bold text-4xl">97%</p>
+                </div>
+                <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
+                    <p class="text-sm">CPU Temperature</p>
+                    <p class="font-bold text-4xl">78°</p>
+                </div>
+
+                <!-- Terminal -->
+                <div class="w-full border border-[#CBD5E1] rounded-md h-96 my-2">
+                    <p class="text-center my-32 font-bold text-3xl text-red-700">
+                        TERMINAL | UNDER DEVELOPMENT
+                    </p>
+                </div>
+
+                <!-- Hashrate graph -->
+                <div class="w-full border border-[#CBD5E1] rounded-md h-96 my-2">
+                    <p class="text-center my-32 font-bold text-3xl text-red-700">
+                        HASRATE GRAPH | UNDER DEVELOPMENT
+                    </p>
+                </div>
+
+                <!-- CPU TEMP AND USAGE GRAPH -->
+                <div class="w-full border border-[#CBD5E1] rounded-md h-96 my-2">
+                    <p class="text-center my-32 font-bold text-3xl text-red-700">
+                        CPU TEMP AND USAGE GRAPH | UNDER DEVELOPMENT
+                    </p>
+                </div>
             </div>
-        </div>
+        {% endif %}
     </main>
 </body>
 

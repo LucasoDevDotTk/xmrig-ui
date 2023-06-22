@@ -31,52 +31,58 @@
         <h1 class="font-bold text-3xl text-white">Xmrig UI - Configuration</h1>
         <hr class="mb-4 text-[#CBD5E1]" />
 
+        <div class="mb-4">
+            <p class="text-sm">Configuration of the XMRig software.</p>
+            <p class="text-sm">Fields marked with "*" is obligatory, and must be filled in!</p>
+        </div>
+
         <!-- Div with a bunch of input fields for configuration of the xmrig software -->
         <div class="flex flex-col">
             <div class="">
                 <form action="/configuration" method="POST">
                     <div class="flex flex-col">
                         <label class="text-xl font-bold">Currency</label>
+                        <p class="text-sm">If coin and algorithm fields are not filled in, they will automatically be assigned a value based on the pool.</p>
                         <input class="border-[#CBD5E1] bg-white/0 border p-5 rounded-md text-white my-2 block"
                             type="text" name="coin" placeholder="Coin" />
                         <input class="border-[#CBD5E1] bg-white/0 border p-5 rounded-md text-white my-2 block"
-                        type="text" name="algorithm" placeholder="Algorithm" />
+                            type="text" name="algorithm" placeholder="Algorithm" />
                         <label class="text-xl font-bold">Pool</label>
                         <input class="border-[#CBD5E1] bg-white/0 border p-5 rounded-md text-white my-2 block"
-                            type="text" name="pool" placeholder="Host" />
+                            type="text" name="pool" placeholder="Host*" />
                         <input class="border-[#CBD5E1] bg-white/0 border p-5 rounded-md text-white my-2 block"
-                        type="text" name="pool_port" placeholder="Port" />
+                            type="text" name="pool_port" placeholder="Port*" />
                         <label class="text-xl font-bold">Wallet</label>
                         <input class="border-[#CBD5E1] bg-white/0 border p-5 rounded-md text-white my-2 block"
-                            type="text" name="address" placeholder="Address" />
+                            type="text" name="address" placeholder="Address*" />
                         <input class="border-[#CBD5E1] bg-white/0 border p-5 rounded-md text-white my-2 block"
-                        type="text" name="password" placeholder="Password" />
+                            type="text" name="password" placeholder="Password" />
 
 
 
                         <!-- Checkboxes for CPU, OpenCL and CUDA mining -->
                         <label class="text-xl font-bold my-1">Mining Method</label>
                         <div class="flex my-2">
-                            <input class="block w-8 h-8 mr-4 cursor-pointer"
-                            type="checkbox" name="cpu" />
+                            <input class="block w-8 h-8 mr-4 cursor-pointer" type="checkbox" name="cpu" />
                             <label class="font-bold text-xl my-auto">CPU</label>
                         </div>
                         <div class="flex my-2">
-                            <input class="block w-8 h-8 mr-4 cursor-pointer"
-                            type="checkbox" name="open_cl" />
+                            <input class="block w-8 h-8 mr-4 cursor-pointer" type="checkbox" name="open_cl" />
                             <label class="font-bold text-xl my-auto">OpenCL</label>
                         </div>
                         <div class="flex my-2">
-                            <input class="block w-8 h-8 mr-4 cursor-pointer"
-                            type="checkbox" name="cuda" />
+                            <input class="block w-8 h-8 mr-4 cursor-pointer" type="checkbox" name="cuda" />
                             <label class="font-bold text-xl my-auto">Cuda</label>
                         </div>
 
                         <label class="text-xl font-bold my-1">Donation</label>
                         <input class="border-[#CBD5E1] bg-white/0 border p-5 rounded-md text-white my-2 block"
-                        type="number" name="donation" placeholder="Donation (%)" />
+                            type="number" name="donation" placeholder="Donation (%)" />
 
-                        <button class="border-green-500 bg-white/0 border p-5 rounded-md text-white my-5 block">Save</button>
+                        <button
+                            class="border-green-500 bg-white/0 border p-5 rounded-md text-white my-5 block">Save</button>
+
+                        <p class="text-red-500">{{ error }}</p>
                     </div>
                 </form>
             </div>
