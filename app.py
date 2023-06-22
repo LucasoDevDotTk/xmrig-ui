@@ -1,8 +1,13 @@
+import os
+
+# Install requirements.txt
+os.system("pip install -r requirements.txt")
+
 from flask import Flask, render_template, request, redirect
 from flaskwebgui import FlaskUI
+# import pyuac
 
 import json
-import os
 import subprocess
 
 __version__ = "0.1.0"
@@ -32,6 +37,12 @@ def index():
         configured = "True"
     else:
         configured = "False"
+    
+    if running == "False":
+        try:
+            xmrig_prc.kill()
+        except:
+            pass
 
     return render_template('index.html', running=running, configured=configured)
 
@@ -164,5 +175,10 @@ def configuration_post():
         return render_template('configuration.html')
 
 if __name__ == "__main__":
-    # app.run(debug=True)
+
+    # if not pyuac.isUserAdmin():
+    #     print("Re-launching as admin!")
+    #     pyuac.runAsAdmin()
+    # else:        
+        # app.run(debug=True)
     FlaskUI(app=app, server="flask").run()
