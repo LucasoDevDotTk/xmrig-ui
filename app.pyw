@@ -1,7 +1,7 @@
 import os
 
 # Install requirements.txt
-os.system("pip install -r requirements.txt")
+# os.system("pip install -r requirements.txt")
 
 from flask import Flask, render_template, request, redirect
 from flaskwebgui import FlaskUI
@@ -180,5 +180,6 @@ if __name__ == "__main__":
     #     print("Re-launching as admin!")
     #     pyuac.runAsAdmin()
     # else:        
-        # app.run(debug=True)
-    FlaskUI(app=app, server="flask").run()
+
+    app.run(debug=True)
+    # FlaskUI(app=app, server="flask").run()
