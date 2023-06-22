@@ -10,6 +10,12 @@ from flaskwebgui import FlaskUI
 import json
 import subprocess
 
+from install import install_xmrig
+
+# Check if xmrig is installed
+if os.path.isdir("xmrig/xmrig-6.19.3") == False:
+    install_xmrig()
+
 __version__ = "0.1.0"
 
 running = "False"
@@ -50,6 +56,11 @@ def index():
 def serve_configuration():
     return render_template('configuration.html')
 
+@app.route('/reinstall_xmrig', methods=['POST'])
+def reinstall_xmrig():
+    install_xmrig()
+    return redirect('/')
+
 @app.route('/settings')
 def configuration():
     return render_template('under_development.html')
@@ -65,7 +76,7 @@ def start():
     running = "True"
 
     global xmrig_prc
-    xmrig_prc = subprocess.Popen(["./xmrig/xmrig"], cwd="./xmrig")
+    xmrig_prc = subprocess.Popen(["./xmrig/xmrig-6.19.3/xmrig"], cwd="./xmrig")
 
     return redirect('/')
 
