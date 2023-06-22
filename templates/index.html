@@ -47,6 +47,7 @@
         <!-- If configured -->
         
         {% if configured == "True" %}
+        <p class="text-sm">Statistics are currently not working!</p>
             {% if running == "False" %}
                 <form action="/start" method="post">
                     <button class="border-green-500 bg-white/0 border p-5 w-full rounded-md text-white my-5 block">Start XMRig</button>
