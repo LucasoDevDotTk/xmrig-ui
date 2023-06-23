@@ -27,7 +27,7 @@ def install_xmrig():
         os.system("curl -LJO " + url)
 
         tar = tarfile.open("xmrig-6.19.3-linux-static-x64.tar.gz")
-        tar.extractall(path="/xmrig")
+        tar.extractall(path="xmrig")
         tar.close()
 
         os.system("rm xmrig-6.19.3-linux-static-x64.tar.gz")
@@ -48,7 +48,7 @@ def install_xmrig():
         os.system("curl -LJO " + url)
 
         tar = tarfile.open("xmrig-6.19.3-macos-arm64.tar.gz")
-        tar.extractall(path="/xmrig")
+        tar.extractall(path="xmrig")
         tar.close()
 
         os.system("rm xmrig-6.19.3-macos-arm64.tar.gz")

@@ -76,7 +76,7 @@ def start():
     running = "True"
 
     global xmrig_prc
-    xmrig_prc = subprocess.Popen(["./xmrig/xmrig-6.19.3/xmrig"], cwd="./xmrig")
+    xmrig_prc = subprocess.Popen(["./xmrig/xmrig-6.19.3/xmrig"])
 
     return redirect('/')
 
@@ -91,7 +91,10 @@ def stop():
     xmrig_prc.kill()
 
     return redirect('/')
-    
+
+@app.route('/get_json_config')
+def get_json_config():
+    return json.dumps(get_config(), indent=4)
 
 # Post to /configuration and print content posted
 @app.route('/configuration', methods=['POST'])
@@ -175,7 +178,7 @@ def configuration_post():
             json.dump(json_config, outfile, indent=4)
             outfile.write("\n")
         
-        with open('./xmrig/config.json', 'w') as outfile:
+        with open('./xmrig/xmrig-6.19.3/config.json', 'w') as outfile:
             json.dump(json_config, outfile, indent=4)
             outfile.write("\n")
 
@@ -192,5 +195,5 @@ if __name__ == "__main__":
     #     pyuac.runAsAdmin()
     # else:        
 
-    app.run(debug=True)
-    # FlaskUI(app=app, server="flask").run()
+    #app.run(debug=True)
+    FlaskUI(app=app, server="flask").run()
