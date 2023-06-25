@@ -8,6 +8,17 @@
 
     <link href="{{url_for('static', filename = 'main.css')}}" rel="stylesheet" />
     <link rel="shortcut icon" href="{{url_for('static', filename = 'icon.png')}}"/>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"
+        integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ=="
+        crossorigin="anonymous"
+    ></script>
+    
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename = 'live_data.js') }}"
+    ></script>
 </head>
 
 <body class="m-4 mt-10 lg:container lg:mx-auto bg-[#030711] text-white">
@@ -69,19 +80,15 @@
             <div class="flex flex-wrap">
                 <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
                     <p class="text-sm">Uptime</p>
-                    <p class="font-bold text-4xl">45h</p>
-                </div>
-                <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
-                    <p class="text-sm">Hashrate</p>
-                    <p class="font-bold text-4xl">2.1K</p>
+                    <p id="uptime" class="font-bold text-4xl">0</p>
                 </div>
                 <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
                     <p class="text-sm">Xmrig Version</p>
-                    <p class="font-bold text-4xl">v.1.6.8</p>
+                    <p class="font-bold text-4xl">{{ xmrig_version }}</p>
                 </div>
                 <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
                     <p class="text-sm">CPU Utilization</p>
-                    <p class="font-bold text-4xl">97%</p>
+                    <p id="cpu_usage" class="font-bold text-4xl">97%</p>
                 </div>
                 <div class="border-[#CBD5E1] block border p-5 pb-9 w-72 my-2 rounded-md mr-4">
                     <p class="text-sm">CPU Temperature</p>

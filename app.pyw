@@ -5,24 +5,56 @@ import os
 
 from flask import Flask, render_template, request, redirect
 from flaskwebgui import FlaskUI
+import psutil
 # import pyuac
 
 import json
 import subprocess
+from datetime import datetime
+from threading import Lock
+import random
 
-from install import install_xmrig
+from modules import install
+from modules import socket
 
 # Check if xmrig is installed
 if os.path.isdir("xmrig/xmrig-6.19.3") == False:
-    install_xmrig()
+    install.install_xmrig()
 
-__version__ = "0.1.0"
+__version__ = "0.1.6"
+xmrig_version = "6.19.3"
 
 running = "False"
 
 configured = "False"
 
+start_time = datetime.now()
+
+# Thread for updating the live data
+thread = None
+thread_lock = Lock()
+
+
 app = Flask(__name__)
+socketio = SocketIO(app, cors_allowed_origins='*')
+Session(app)
+
+def calculate_uptime():
+    # Calculate how many hours the program has been up for
+    uptime = datetime.now() - start_time
+    uptime = uptime.total_seconds() / 3600
+    uptime = round(uptime, 2)
+    return uptime
+
+def update_live_data():
+    while True:
+        socketio.sleep(1)
+        print("Updating live data")
+        uptime = int(calculate_uptime())
+        cpu_usage = psutil.cpu_percent(percpu=False)
+        print(psutil.cpu_percent())
+        socketio.emit('live_data', {'uptime': uptime, 'cpu_usage': cpu_usage}, namespace='/')
+
 
 def get_config():
     with open('config.json') as json_file:
@@ -50,7 +82,7 @@ def index():
         except:
             pass
 
-    return render_template('index.html', running=running, configured=configured)
+    return render_template('index.html', running=running, configured=configured, xmrig_version=xmrig_version, version=__version__)
 
 @app.route('/configuration')
 def serve_configuration():
@@ -188,6 +220,13 @@ def configuration_post():
 
         return render_template('configuration.html')
 
+@socketio.on('connect')
+def handle_connect():
+    global thread
+    with thread_lock:
+        if thread is None:
+            thread = socketio.start_background_task(update_live_data)
+
 if __name__ == "__main__":
 
     # if not pyuac.isUserAdmin():
@@ -195,5 +234,5 @@ if __name__ == "__main__":
     #     pyuac.runAsAdmin()
     # else:        
 
-    #app.run(debug=True)
-    FlaskUI(app=app, server="flask").run()
+    app.run(debug=True)
+    # FlaskUI(app=app, server="flask").run()
