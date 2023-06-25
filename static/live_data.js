@@ -5,7 +5,7 @@ console.log("Connected")
 
 //receive details from server
 socket.on("live_data", function (msg) {
-    // Get element with id: moisture_level, and set its innerHTML to msg.data
+    console.log("Received live_data: " + msg.uptime);
 
     console.log(msg.uptime);
     document.getElementById("uptime").innerHTML = msg.uptime;

@@ -5,17 +5,20 @@ import os
 
 from flask import Flask, render_template, request, redirect
 from flaskwebgui import FlaskUI
+from flask_socketio import SocketIO, emit
 import psutil
+
 # import pyuac
 
 import json
 import subprocess
 from datetime import datetime
 from threading import Lock
-import random
 
 from modules import install
 from modules import socket
+from modules import config
+from modules import live_data
 
 # Check if xmrig is installed
 if os.path.isdir("xmrig/xmrig-6.19.3") == False:
@@ -30,48 +33,25 @@ configured = "False"
 
 start_time = datetime.now()
 
+app = Flask(__name__)
+socketio = SocketIO(app, cors_allowed_origins='*')
+
 # Thread for updating the live data
 thread = None
 thread_lock = Lock()
-
-
-app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins='*')
-Session(app)
-
-def calculate_uptime():
-    # Calculate how many hours the program has been up for
-    uptime = datetime.now() - start_time
-    uptime = uptime.total_seconds() / 3600
-    uptime = round(uptime, 2)
-    return uptime
 
 def update_live_data():
     while True:
         socketio.sleep(1)
         print("Updating live data")
-        uptime = int(calculate_uptime())
+        uptime = int(live_data.calculate_uptime(start_time=start_time))
         cpu_usage = psutil.cpu_percent(percpu=False)
         print(psutil.cpu_percent())
         socketio.emit('live_data', {'uptime': uptime, 'cpu_usage': cpu_usage}, namespace='/')
 
-
-def get_config():
-    with open('config.json') as json_file:
-        data = json.load(json_file)
-    return data
-
-def check_config():
-    try:
-        with open('config.json') as json_file:
-            data = json.load(json_file)
-        return True
-    except:
-        return False
-
 @app.route('/')
 def index():
-    if check_config() == True:
+    if config.check_config() == True:
         configured = "True"
     else:
         configured = "False"
@@ -90,7 +70,7 @@ def serve_configuration():
 
 @app.route('/reinstall_xmrig', methods=['POST'])
 def reinstall_xmrig():
-    install_xmrig()
+    install.install_xmrig()
     return redirect('/')
 
 @app.route('/settings')
@@ -126,7 +106,7 @@ def stop():
 
 @app.route('/get_json_config')
 def get_json_config():
-    return json.dumps(get_config(), indent=4)
+    return json.dumps(config.get_config(), indent=4)
 
 # Post to /configuration and print content posted
 @app.route('/configuration', methods=['POST'])
