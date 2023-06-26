@@ -40,6 +40,22 @@ socketio = SocketIO(app, cors_allowed_origins='*')
 thread = None
 thread_lock = Lock()
 
+# Thread for updating the xmrig output
+thread1 = None
+thread_lock1 = Lock()
+
+def update_xmrig_output():
+    while True:
+        try:
+            xmrig_output = str(xmrig_prc.stdout.readline().decode("utf-8"))
+
+            socketio.emit('xmrig_output', {'xmrig_output': xmrig_output}, namespace='/')
+            print(xmrig_output)
+
+        except Exception as e:
+            pass
+
+
 def update_live_data():
     while True:
         socketio.sleep(1)
@@ -49,6 +65,7 @@ def update_live_data():
         cpu_freq = psutil.cpu_freq(percpu=False).max
         total_mem = round(psutil.virtual_memory().total/1000000000)
         mem_usage = psutil.virtual_memory().percent
+
         socketio.emit('live_data', {'uptime': uptime, 'cpu_usage': cpu_usage, 'cpu_freq': cpu_freq, 'total_mem':total_mem, 'mem_usage': mem_usage}, namespace='/')
 
 @app.route('/')
@@ -90,7 +107,7 @@ def start():
     running = "True"
 
     global xmrig_prc
-    xmrig_prc = subprocess.Popen(["./xmrig/xmrig-6.19.3/xmrig"])
+    xmrig_prc = subprocess.Popen(["./xmrig/xmrig-6.19.3/xmrig"], stdout=subprocess.PIPE)
 
     return redirect('/')
 
@@ -101,8 +118,10 @@ def stop():
     global running
     running = "False"
 
+    global xmrig_prc
     # Stop miner
     xmrig_prc.kill()
+    xmrig_prc = None
 
     return redirect('/')
 
@@ -208,6 +227,12 @@ def handle_connect():
     with thread_lock:
         if thread is None:
             thread = socketio.start_background_task(update_live_data)
+    
+    global thread1
+    with thread_lock1:
+        if thread1 is None:
+            thread1 = socketio.start_background_task(update_xmrig_output)
+
 
 if __name__ == "__main__":
 
