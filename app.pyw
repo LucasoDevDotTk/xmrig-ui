@@ -46,8 +46,10 @@ def update_live_data():
         print("Updating live data")
         uptime = int(live_data.calculate_uptime(start_time=start_time))
         cpu_usage = psutil.cpu_percent(percpu=False)
-        print(psutil.cpu_percent())
-        socketio.emit('live_data', {'uptime': uptime, 'cpu_usage': cpu_usage}, namespace='/')
+        cpu_freq = psutil.cpu_freq(percpu=False).max
+        total_mem = round(psutil.virtual_memory().total/1000000000)
+        mem_usage = psutil.virtual_memory().percent
+        socketio.emit('live_data', {'uptime': uptime, 'cpu_usage': cpu_usage, 'cpu_freq': cpu_freq, 'total_mem':total_mem, 'mem_usage': mem_usage}, namespace='/')
 
 @app.route('/')
 def index():
@@ -66,7 +68,7 @@ def index():
 
 @app.route('/configuration')
 def serve_configuration():
-    return render_template('configuration.html')
+    return render_template('configuration.html', xmrig_version=xmrig_version, version=__version__)
 
 @app.route('/reinstall_xmrig', methods=['POST'])
 def reinstall_xmrig():
@@ -79,7 +81,7 @@ def configuration():
 
 @app.route('/documentation')
 def documentation():
-    return render_template('under_development.html')
+    return redirect("https://github.com/lucasodevdottk/xmrig-ui/", code=302)
 
 @app.route('/start', methods=['POST'])
 def start():
@@ -198,7 +200,7 @@ def configuration_post():
         global configured
         configured = "True"
 
-        return render_template('configuration.html')
+        return redirect('/')
 
 @socketio.on('connect')
 def handle_connect():

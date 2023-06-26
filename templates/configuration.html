@@ -12,25 +12,39 @@
 </head>
 
 <body class="m-4 mt-10 lg:container lg:mx-auto bg-[#030711] text-white">
-    <!-- Sidebar -->
-    <div class="block">
-        <div class="w-72 bg-black/40 fixed z-0 top-0 left-0 overflow-x-hidden pt-4 h-full">
-            <nav class="mt-2w">
-                <a class="block" href=""><img class="flex justify-center p-4"
-                        src="{{url_for('static', filename = 'logo.svg')}}" alt="" /></a>
-                <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block" href="/">Dashboard</a>
-                <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block font-bold"
-                    href="/configuration">Configuration</a>
-                <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block"
-                    href="/settings">Settings</a>
-                <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block" href="">Documentation</a>
-            </nav>
-        </div>
+   <!-- Sidebar -->
+   <div class="block">
+    <div class="w-72 bg-black/40 fixed z-0 top-0 left-0 overflow-x-hidden pt-4 h-full">
+        <nav class="mt-2">
+            <a class="block" href=""><img class="flex justify-center p-4"
+                    src="{{url_for('static', filename = 'logo.svg')}}" alt="" /></a>
+            <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block"
+                href="/">Dashboard</a>
+            <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block font-bold"
+                href="/configuration">Configuration</a>
+            <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block"
+                href="/settings">Settings</a>
+            <a class="border-[#CBD5E1] border p-5 rounded-md text-white m-2 mx-4 block" href="">Documentation</a>
+        </nav>
+
+
+        <div class="text-center absolute bottom-0 m-2 mb-4">
+        <p class="text-sm">XMRig: {{ xmrig_version }}</p>
+        <p class="text-sm">Dashboard: {{ version }}</p>
+        <p class="text-sm">Copyright &#169; 2022 <a href="https://lucasodev.tk" class="hover:underline">LucasoDevDotTk</a>.
+        <p class="text-sm">Not affiliated with XMRig, all trademarks are owned by their respective owners.</p>
+        </span> </p>
     </div>
+
+    </div>
+</div>
 
     <main class="ml-72 pl-5">
 
-        <h1 class="font-bold text-3xl text-white">Xmrig UI - Configuration</h1>
+        <img class="absolute -z-10 w-max -inset-y-52" src="{{url_for('static', filename = 'blurred_blobs.svg')}}"
+        alt="" />
+
+        <h1 class="font-bold text-3xl text-white">XMRig UI - Configuration</h1>
         <hr class="mb-4 text-[#CBD5E1]" />
 
         <div class="mb-4">
