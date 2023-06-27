@@ -7,6 +7,7 @@ from flask import Flask, render_template, request, redirect
 from flaskwebgui import FlaskUI
 from flask_socketio import SocketIO, emit
 import psutil
+from flask_session import Session
 
 # import pyuac
 
@@ -35,6 +36,7 @@ start_time = datetime.now()
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins='*')
+Session(app)
 
 # Thread for updating the live data
 thread = None
